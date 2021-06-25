@@ -11,7 +11,7 @@ import {
 import { Payment } from "@material-ui/icons";
 import useStyles from "./styles";
 
-const Product = ({ product, onAddToCart }) => {
+export function Product({ product, onAddToCart }) {
   const classes = useStyles();
 
   return (
@@ -52,6 +52,4 @@ const Product = ({ product, onAddToCart }) => {
       </CardActions>
     </Card>
   );
-};
-
-export default Product;
+}

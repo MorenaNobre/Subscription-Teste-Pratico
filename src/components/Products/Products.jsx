@@ -1,10 +1,10 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 
-import Product from "./Product/Product";
+import { Product } from "./Product/Product";
 import useStyles from "./styles";
 
-const Products = ({ products, onAddToCart }) => {
+export function Products({ products, onAddToCart }) {
   const classes = useStyles();
 
   return (
@@ -19,6 +19,4 @@ const Products = ({ products, onAddToCart }) => {
       </Grid>
     </main>
   );
-};
-
-export default Products;
+}

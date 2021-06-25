@@ -41,7 +41,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <Navbar />
+        <Navbar totalItems={cart.total_items}/>
         <Products products={products} onAddToCart={handleAddToCart} />
       </div>
     </ThemeProvider>
