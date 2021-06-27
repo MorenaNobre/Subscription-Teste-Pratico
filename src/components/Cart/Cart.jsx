@@ -44,7 +44,7 @@ export function Cart({
             color="secondary"
             onClick={handleEmptyCart}
           >
-            Empty Cart
+            Esvaziar o Carrinho
           </Button>
           <Button
             component={Link}
@@ -55,7 +55,7 @@ export function Cart({
             variant="contained"
             color="primary"
           >
-            Checkout
+            Continuar a compra
           </Button>
         </div>
       </div>

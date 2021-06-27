@@ -8,7 +8,7 @@ import {
   // IconButton,
   Button,
 } from "@material-ui/core";
-import { Payment } from "@material-ui/icons";
+import { CheckCircleOutline } from "@material-ui/icons";
 import useStyles from "./styles";
 
 export function Product({ product, onAddToCart }) {
@@ -41,10 +41,10 @@ export function Product({ product, onAddToCart }) {
           color="default"
           variant="outlined"
           className={classes.button}
-          startIcon={<Payment />}
+          startIcon={<CheckCircleOutline />}
           onClick={() => onAddToCart(product.id, 1)}
         >
-          Comprar
+          Assinar
         </Button>
         {/* <IconButton aria-label="Add to Cart">
           <Payment />
