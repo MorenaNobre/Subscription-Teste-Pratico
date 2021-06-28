@@ -13,10 +13,11 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 export function PaymentForm({
   checkoutToken,
-  billingData,
+  nextStep,
   backStep,
+  shippingData,
   onCaptureCheckout,
-  nextStep
+  timeout,
 }) {
   const handleSubmit = async (event, elements, stripe) => {
     event.preventDefault();
@@ -25,30 +26,21 @@ export function PaymentForm({
 
     const cardElement = elements.getElement(CardElement);
 
-    //stripe's API to create a payment method
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: cardElement,
     });
 
     if (error) {
-      console.log(error);
+      console.log("[error]", error);
     } else {
       const orderData = {
         line_items: checkoutToken.live.line_items,
-        customer: {
-          nomecompleto: billingData.nomeCompleto,
-          email: billingData.email,
-        },
-        billing: {
-          name: "Primary",
-          street: billingData.endereco,
-          town_city: billingData.cidade,
-          county_state: billingData.shippingSubdivision,
-          country: billingData.shippingCountry,
-        },
+        customer: { firstname: shippingData.firstName, lastname: shippingData.lastName, email: shippingData.email },
+        shipping: { name: 'International', street: shippingData.address1, town_city: shippingData.city, county_state: shippingData.shippingSubdivision, postal_zip_code: shippingData.zip, country: shippingData.shippingCountry },
+        fulfillment: { shipping_method: shippingData.shippingOption },
         payment: {
-          gateway: "stripe",
+          gateway: 'stripe',
           stripe: {
             payment_method_id: paymentMethod.id,
           },
@@ -57,7 +49,9 @@ export function PaymentForm({
 
       onCaptureCheckout(checkoutToken.id, orderData);
 
-      nextStep()
+      timeout()
+
+      nextStep();
     }
   };
 
@@ -66,7 +60,7 @@ export function PaymentForm({
       <Review checkoutToken={checkoutToken} />
       <Divider />
       <Typography variant="h6" gutterBottom style={{ margin: "20px 0" }}>
-        Forma de Pagamento
+        Payment method
       </Typography>
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
@@ -76,7 +70,7 @@ export function PaymentForm({
               <br /> <br />
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <Button variant="outlined" onClick={backStep}>
-                  Voltar
+                  Back
                 </Button>
                 <Button
                   type="submit"
@@ -94,3 +88,4 @@ export function PaymentForm({
     </>
   );
 }
+

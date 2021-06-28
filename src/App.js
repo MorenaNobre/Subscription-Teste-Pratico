@@ -52,7 +52,7 @@ const App = () => {
   };
 
   const refreshCart = async () => {
-    const newCart = await commerce.cart.refresh();
+    const newCart = await commerce.cart.refresh(Cart);
 
     setCart(newCart);
   };
@@ -65,6 +65,7 @@ const App = () => {
       );
 
       setOrder(incomingOrder);
+
       refreshCart();
     } catch (error) {
       setErrorMessage(error.data.error.message);

@@ -15,9 +15,10 @@ export function Cart({
 
   const EmptyCart = () => (
     <Typography variant="subtitle1">
-      Você ainda não escolheu um plano. 
+      Você ainda não escolheu um plano.
       <Link to="/" className={classes.link}>
-        <br />Escolha o plano que mais combina com você! :D
+        <br />
+        Escolha o plano que mais combina com você! :D
       </Link>
     </Typography>
   );
@@ -27,7 +28,11 @@ export function Cart({
       <Grid container spacing={3}>
         {cart.line_items.map((item) => (
           <Grid item xs={12} sm={4} key={item.id}>
-            <CartItem item={item} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} />
+            <CartItem
+              item={item}
+              onUpdateCartQty={handleUpdateCartQty}
+              onRemoveFromCart={handleRemoveFromCart}
+            />
           </Grid>
         ))}
       </Grid>

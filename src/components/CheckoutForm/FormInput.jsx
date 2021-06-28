@@ -13,6 +13,7 @@ export function FormInput({ name, label }) {
         render={({ field }) => (
           <TextField {...field} label={label} fullWidth required />
         )}
+        defaultValue=""
         control={control}
         name={name}
       />
